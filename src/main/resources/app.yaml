@@ -1,0 +1,12 @@
+server:
+  port: 3000
+spring:
+  application.name: thought api
+logging: # define the various levels of log for each library
+  org.springframework: INFO
+  com.example.springboottesting: DEBUG
+jpa:
+  datasource:
+    name: db
+    url: 'jdbc:sqlite:C:/Users/nles01/Documents/programing/springboot-testing/springbootTesting/database.db'
+    driver: rg.sqlite.JDBC

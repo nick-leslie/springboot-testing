@@ -12,7 +12,6 @@ import java.util.List;
 @Table(name = "user")
 public class user implements Serializable {
     @Id
-    @GeneratedValue
     public String id;
     public String name;
     @OneToMany

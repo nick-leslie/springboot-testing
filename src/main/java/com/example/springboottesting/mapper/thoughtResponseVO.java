@@ -1,16 +1,15 @@
 package com.example.springboottesting.mapper;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class userResponseVo extends userVO {
+public class thoughtResponseVO extends thoughtVO{
     private String id;
 
-    public userResponseVo(String id,String name) {
-        super(name);
+    public thoughtResponseVO(String id,String posterId, String thought) {
+        super(posterId, thought);
         this.id = id;
     }
 }

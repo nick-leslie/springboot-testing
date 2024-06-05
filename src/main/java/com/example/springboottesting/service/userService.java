@@ -15,10 +15,21 @@ public class userService {
 
     private final userRepository userRepo;
 
-    public Iterable<user> getUser() {
+    public Iterable<user> getUsers() {
         return userRepo.findAll();
     }
-
+    public user getUserByName(String username) {
+        return userRepo.findByUsername(username);
+    }
+    public user getUserById(String id) {
+        return userRepo.findByUsername(id);
+    }
+    public user createUser() {
+        //TODO replace with random name gen
+        user user = new user(UUID.randomUUID().toString(),UUID.randomUUID().toString());
+        userRepo.save(user);
+        return user;
+    }
     public user createUser(userVO userInput) {
         user user = new user(UUID.randomUUID().toString(),userInput.getName());
         userRepo.save(user);

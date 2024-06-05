@@ -18,6 +18,7 @@ public class user implements Serializable {
     private List<thought> thoughts;
 
     public user(String id, String name) {
+        this.id = id;
         this.name = name;
     }
 

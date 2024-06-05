@@ -7,6 +7,7 @@ import com.example.springboottesting.repositories.thoughtRepository;
 import com.example.springboottesting.repositories.userRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.sqlite.SQLiteException;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,16 +20,22 @@ public class thoughtService {
 
 
     public List<thought> getAll() {
-        return thoughtRepo.findAll();
+        List<thought> thoughts = thoughtRepo.findAll();
+        return thoughts;
     }
 
 
     public thought createThought(thoughtVO thoughtVO) {
         // checks if user exists if it doesn't then we create a new user with a random name
-        user poster = userService.getUserByName(thoughtVO.getPosterId());
-        if(poster==null) {
+        user poster = new user();
+        try {
+            poster = userService.getUserById(thoughtVO.getPosterId());
+        } catch(Exception e) {
             poster = userService.createUser();
+
         }
-        return new thought(UUID.randomUUID().toString() ,thoughtVO.getThought(),poster);
+        thought thought =  new thought(UUID.randomUUID().toString() ,thoughtVO.getThought(),poster);
+        thoughtRepo.save(thought);
+        return thought;
     }
 }

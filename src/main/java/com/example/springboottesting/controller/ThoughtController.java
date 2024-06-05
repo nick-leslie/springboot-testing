@@ -1,5 +1,6 @@
 package com.example.springboottesting.controller;
 
+import com.example.springboottesting.mapper.thoughtResponseVO;
 import com.example.springboottesting.mapper.thoughtVO;
 import com.example.springboottesting.mapper.userVO;
 import com.example.springboottesting.models.thought;
@@ -11,19 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/thought")
 @RequiredArgsConstructor
 public class ThoughtController {
 
     private final com.example.springboottesting.service.thoughtService thoughtService;
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public Iterable<thought> GetThoughts() {
-        return thoughtService.getAll();
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    public Iterable<thoughtResponseVO> GetThoughts() {
+        List<thoughtResponseVO> thoughts = thoughtService.getAll().stream().map(idea -> new thoughtResponseVO(idea.getId(),idea.getUser().id,idea.getThought())).toList();
+        return thoughts;
     }
 
     @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public thought PostUser(@RequestBody thoughtVO thoughtVO) {
-        return thoughtService.createThought(thoughtVO);
+    public thoughtResponseVO PostUser(@RequestBody thoughtVO thoughtVO) {
+        thought idea = thoughtService.createThought(thoughtVO);
+        return new thoughtResponseVO(idea.getId(),idea.getUser().id,idea.getThought());
     }
 }

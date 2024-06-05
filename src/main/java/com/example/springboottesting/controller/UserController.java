@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.*;
 public class UserController  {
 
     private final userService userService;
-    @RequestMapping(value = "/",method = RequestMethod.GET)
+    @RequestMapping(value = "",method = RequestMethod.GET)
     public Iterable<user> GetUser() {
         return userService.getUsers();
     }
 
     @RequestMapping(value = "/create",method = RequestMethod.POST)
     public user PostUser(@RequestBody userVO user) {
+        System.out.println(user);
         return userService.createUser(user);
     }
 }

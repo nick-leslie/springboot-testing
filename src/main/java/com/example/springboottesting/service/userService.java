@@ -6,6 +6,7 @@ import com.example.springboottesting.repositories.userRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 // this is were the large amount of the work will take place
 @Service
@@ -18,11 +19,11 @@ public class userService {
     public Iterable<user> getUsers() {
         return userRepo.findAll();
     }
-    public user getUserByName(String username) {
+    public List<user> getUserByName(String username) {
         return userRepo.findByUsername(username);
     }
     public user getUserById(String id) {
-        return userRepo.findByUsername(id);
+        return userRepo.findByUserId(id).get(0);
     }
     public user createUser() {
         //TODO replace with random name gen

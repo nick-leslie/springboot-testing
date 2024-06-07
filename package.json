@@ -1,0 +1,14 @@
+{
+  "name": "springboottesting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": " \"build\": \"tailwindcss -i ./main.css -o ../resources/static/main.css\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  }
+}
